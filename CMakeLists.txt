@@ -56,3 +56,9 @@ target_link_libraries(lidar_camera_multi_calib
 target_link_libraries(bag_to_pcd 
   ${catkin_LIBRARIES}  ${PCL_LIBRARIES}
 )
+
+# save image from bag
+add_executable(bag_to_image src/bag_to_image.cpp)
+target_link_libraries(bag_to_image 
+  ${catkin_LIBRARIES} ${OpenCV_LIBS}
+)

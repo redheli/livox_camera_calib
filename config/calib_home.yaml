@@ -1,0 +1,18 @@
+# Data path. adjust them!
+common:
+    image_file: "/home/max/ground_map/rosbag/home-clib/images/1674999340.384650.png"
+    pcd_file: "/home/max/ground_map/rosbag/home-clib/2023-01-29-21-35-40.pcd"
+    result_file: "/home/max/ground_map/rosbag/home-clib/2023-01-29-21-35-40.txt"
+
+# Camera Parameters. Adjust them!
+# dist_coeffs: [-0.0487419, 0.0223437, 0.000334614, -8.44957e-05, -0.0093265]
+camera:
+    camera_matrix: [1068.82, 0.0,      959.27,
+                0.0,     1069.06,  539.217,
+                0.0,     0.0,      1.0     ]
+    dist_coeffs: [0.0, 0.0, 0.0, 0.0, 0.0]
+
+# Calibration Parameters.!
+calib:
+    calib_config_file: "/home/max/ws_livox/src/livox_camera_calib/config/config_indoor.yaml"
+    use_rough_calib: true # set true if your initial_extrinsic is bad   

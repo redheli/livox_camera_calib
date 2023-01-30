@@ -18,8 +18,8 @@ bool is_custom_msg;
 int main(int argc, char **argv) {
   ros::init(argc, argv, "lidarCamCalib");
   ros::NodeHandle nh;
-  nh.param<string>("bag_file", bag_file, "");
-  nh.param<string>("pcd_file", pcd_file, "");
+  nh.param<string>("bag_file", bag_file, "/home/max/ground_map/rosbag/home-clib/2023-01-29-21-35-40.bag");
+  nh.param<string>("pcd_file", pcd_file, "/home/max/ground_map/rosbag/home-clib/2023-01-29-21-35-40.pcd");
   nh.param<string>("lidar_topic", lidar_topic, "/livox/lidar");
   nh.param<bool>("is_custom_msg", is_custom_msg, false);
   pcl::PointCloud<pcl::PointXYZI> output_cloud;
@@ -41,6 +41,7 @@ int main(int argc, char **argv) {
   std::vector<string> lidar_topic_vec;
   lidar_topic_vec.push_back(lidar_topic);
   rosbag::View view(bag, rosbag::TopicQuery(lidar_topic_vec));
+  int count = 0;
   for (const rosbag::MessageInstance &m : view) {
     if (is_custom_msg) {
       livox_ros_driver::CustomMsg livox_cloud_msg =
@@ -63,6 +64,10 @@ int main(int argc, char **argv) {
       for (uint i = 0; i < cloud.size(); ++i) {
         output_cloud.points.push_back(cloud.points[i]);
       }
+    }
+    count++;
+    if (count > 100){
+      break;
     }
   }
   output_cloud.is_dense = false;
